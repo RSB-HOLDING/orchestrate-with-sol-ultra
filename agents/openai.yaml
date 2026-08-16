@@ -1,0 +1,7 @@
+interface:
+  display_name: "Orchestrate with Sol Ultra"
+  short_description: "Lead with Sol Ultra, delegate with precision"
+  default_prompt: "Use $orchestrate-with-sol-ultra to plan, delegate, integrate, and verify this complex task."
+
+policy:
+  allow_implicit_invocation: true
