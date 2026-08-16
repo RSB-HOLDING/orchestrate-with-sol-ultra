@@ -1,0 +1,56 @@
+name: Bug report
+description: Report incorrect, unsafe, or unclear skill behavior
+title: "[Bug]: "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the skill. Do not include credentials, private prompts, customer data, or vulnerability details here.
+  - type: input
+    id: commit
+    attributes:
+      label: Skill commit
+      description: The installed commit or version you tested.
+      placeholder: 0e2b71e
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Host and version
+      description: For example, Codex desktop, CLI, or IDE extension and its version.
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Sanitized request
+      description: The request that triggered the behavior, with sensitive content removed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Include model fallbacks, commands, logs, or screenshots only when safe to share publicly.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data confirmation
+      options:
+        - label: I removed credentials, private data, and vulnerability details.
+          required: true

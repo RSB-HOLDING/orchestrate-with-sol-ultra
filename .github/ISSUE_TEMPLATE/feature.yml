@@ -1,0 +1,42 @@
+name: Feature proposal
+description: Propose an improvement to the orchestration workflow
+title: "[Proposal]: "
+labels: []
+assignees: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What recurring problem should the skill solve better?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the desired workflow and an example request.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety and approval impact
+      description: Explain effects on permissions, external mutations, shared checkouts, model fallbacks, and final verification.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evaluation plan
+      description: How should maintainers prove this improves behavior without overstating performance?
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to help implement or test this proposal.

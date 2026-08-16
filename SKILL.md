@@ -1,11 +1,11 @@
 ---
 name: orchestrate-with-sol-ultra
-description: Coordinate complex coding and operational work with GPT-5.6 Sol Ultra as the preferred lead, planner, integrator, and reviewer, while delegating bounded lanes to GPT-5.6 Terra or Luna. Use when the user asks for Sol Ultra, highest reasoning, multi-agent delegation, model-tiered orchestration, or a complex repository task with several independent workstreams and integration risk. Do not use for simple questions, tiny edits, or work that cannot be divided safely.
+description: Coordinate complex coding and operational work with GPT-5.6 Sol in a host-exposed Ultra configuration as the preferred lead, planner, integrator, and reviewer, while delegating bounded lanes to GPT-5.6 Terra or Luna. Use when the user asks for Sol Ultra, highest reasoning, multi-agent delegation, model-tiered orchestration, or a complex repository task with several independent workstreams and integration risk. Do not use for simple questions, tiny edits, or work that cannot be divided safely.
 ---
 
 # Orchestrate With Sol Ultra
 
-Use the strongest available reasoning where judgment compounds, and faster models where the work is bounded and independently verifiable. Keep one accountable lead from problem framing through final evidence.
+Use the strongest available reasoning where judgment compounds, and more efficient models where the work is bounded and independently verifiable. Keep one accountable lead from problem framing through final evidence.
 
 ## Establish the operating contract
 
@@ -22,10 +22,10 @@ Inspect the models, reasoning levels, collaboration tools, and concurrency expos
 
 | Role | Preferred configuration | Assign |
 | --- | --- | --- |
-| Lead and final integrator | `gpt-5.6-sol` with `ultra` reasoning | Goal framing, architecture, decomposition, risk decisions, integration, final review, and release judgment |
-| Critical independent reviewer | `gpt-5.6-sol` with `ultra` reasoning | Security, concurrency, native boundaries, migrations, irreversible operations, and adversarial review |
+| Lead and final integrator | `gpt-5.6-sol` with a host-exposed `ultra` configuration | Goal framing, architecture, decomposition, risk decisions, integration, final review, and release judgment |
+| Critical independent reviewer | `gpt-5.6-sol` with a host-exposed `ultra` configuration | Security, concurrency, native boundaries, migrations, irreversible operations, and adversarial review |
 | Bounded implementation worker | `gpt-5.6-terra` with `high` or `max` reasoning | A clearly owned subsystem, diagnosis, implementation, focused tests, and evidence collection |
-| Fast evidence worker | `gpt-5.6-luna` with `medium` or `high` reasoning | Repository inventory, searches, status snapshots, documentation cross-checks, test execution, and low-risk mechanical work |
+| Evidence worker | `gpt-5.6-luna` with `medium` or `high` reasoning | Repository inventory, searches, status snapshots, documentation cross-checks, test execution, and low-risk mechanical work |
 
 If the active coordinator is not confirmed as Sol Ultra, do not pretend otherwise. Only after the delegation gate above passes, and when collaboration tools allow it, ask a `gpt-5.6-sol`/`ultra` subagent to produce the plan or independent final review, while the active coordinator remains transparent about its role.
 
@@ -49,7 +49,7 @@ Respect the host concurrency limit. Reserve enough capacity for the coordinator,
 1. Map the critical path, parallel lanes, risks, and gates.
 2. Separate facts already verified from assumptions that still need evidence.
 3. Assign one accountable owner per file, subsystem, or decision boundary.
-4. Keep high-coupling architecture and cross-lane integration with the Sol Ultra lead.
+4. Keep high-coupling architecture and cross-lane integration with the accountable lead.
 5. Define the evidence required to accept each lane: diffs, commands, test results, screenshots, logs, or cited source material.
 6. Share a concise user update naming the active lanes and why they are separated before spawning workers.
 
@@ -106,7 +106,7 @@ Do not equate a large amount of code with a working product. Never describe depl
 
 - "Use Sol Ultra to lead this migration and delegate the independent work."
 - "Run the strongest multi-agent setup for this repository."
-- "Have GPT-5.6 plan everything, then use faster models for bounded implementation."
+- "Have GPT-5.6 plan everything, then use more efficient models for bounded implementation."
 - "Split this complex feature across agents, integrate it, and prove it works."
 
 Do not trigger for requests such as "rename this variable," "explain this function," or "run one test."
