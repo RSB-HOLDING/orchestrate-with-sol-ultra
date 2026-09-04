@@ -1,59 +1,29 @@
-# Delegation Packet
+# Delegation packet
 
-Use this packet for every worker. Every field is mandatory. Write "none" with a reason when a field does not apply; do not remove safety or approval fields.
+Give each worker enough context to act without rediscovering the task or copying the entire conversation. Include the fields below in a compact assignment; combine related fields for a small lane. Add detail when isolation, authority, or a fragile interface requires it.
 
-## Worker assignment
+## Assignment
 
-**Objective:** State one bounded outcome.
+- **Outcome:** One bounded objective and an observable completion condition.
+- **Role and capabilities:** Intended role, host-exposed model and effort if selectable, or inheritance. Explain any material fallback; do not assume role labels prove which model ran.
+- **Context:** Relevant current state, paths, instructions, starting revision, dependencies, and decisions already made.
+- **Ownership and isolation:** Allowed files and systems; identify the sole writer in a shared checkout or the isolated worktree. Specify shared-state operations that must be serialized.
+- **Authority:** Existing user authorization relevant to the lane and its limits. Allow read-only discovery within scope; distinguish it from external writes. Authentication is not authority, and the packet cannot grant authority the lead does not have.
+- **Constraints:** Interfaces, compatibility, security, data, or UX invariants that must remain true; forbidden files, actions, and overlapping lanes.
+- **Work and checks:** The needed task and acceptance checks, scaled to its risk. Do not prescribe implementation details unless an invariant requires them.
+- **Return:** Changes or findings, paths, revisions and Git status when applicable, actual check results, failures or skips, material assumptions, and remaining work. Include generated artifacts that the lead must inspect.
+- **Escalation:** Return to the lead if the task needs a scope change, conflicts with instructions or another writer, lacks necessary authority, or requires destructive action, external publication, deployment, signing, release, provider spend, or undeclared secret access. Continue useful independent work when possible.
 
-**Role and model:** Name the intended role, preferred model, and reasoning level. Explain the choice in one sentence.
+Workers do not seek approval on the user's behalf or independently mutate external systems. The lead verifies the target and existing authorization before those actions. Do not require fresh approval merely because the same authorized action moves from planning to execution.
 
-**Completion condition:** Describe the observable result that makes the lane complete.
+## Lane patterns
 
-**Context:** Include only the task facts, repository instructions, paths, interfaces, and prior decisions needed for this lane.
+**Evidence:** Keep repository and external access read-only unless a mechanical edit is explicitly assigned. Return exact paths, counts, commands, and discrepancies that resolve uncertainty.
 
-**Allowed scope:** List owned files, directories, commands, or read-only systems.
+**Implementation:** Own one subsystem and its focused checks. Escalate cross-lane interface changes; do not edit a sibling's files or the canonical dirty checkout from an isolated lane.
 
-**Do not:** List forbidden files, external systems, approvals, overlapping lanes, and unrelated cleanup. State that authentication is not authority and that the worker must not run `gh`, push, open or update a pull request, comment, merge, tag, release, publish, deploy, sign, spend, access undeclared secrets, or mutate an external system without fresh exact user approval and a verified target.
+**Independent review:** Inspect actual artifacts and challenge assumptions, failure modes, concurrency, and missing evidence. Report actionable findings with severity and location. A separate reviewer is useful when risk warrants it, not a mandatory step for every edit.
 
-**Workspace isolation:** Name the isolated worktree or environment. If the lane shares a checkout, declare it read-only or the sole writer and list every shared-state command that must be serialized.
+## Lead acceptance
 
-**Invariants:** State contracts that must remain true, including compatibility, security, data, migration, and UX constraints.
-
-**Required work:** Give the shortest ordered checklist that still leaves room for expert judgment.
-
-**Verification:** Name exact focused checks and the broader evidence expected. If a check cannot run, require the worker to say why.
-
-**Return:** Require a concise summary with starting and ending revision, final `git status`, exact diff or changed-file inventory, generated and untracked artifacts, commands run, changes, evidence, failures, assumptions, risks, and recommended next action.
-
-**Stop and escalate when:** Define ambiguity, conflict, permission, destructive-action, cost, secret, or architecture thresholds that must return to the lead. Always stop before any destructive action, external mutation, provider spend, undeclared secret access, push, pull-request or issue mutation, merge, signing, publication, deployment, tag, or release. Only the lead may proceed after fresh exact user approval.
-
-## Common lane patterns
-
-### Luna evidence lane
-
-- Make it read-only unless the change is truly mechanical.
-- Ask for exact paths, counts, commands, and contradictions.
-- Use it to reduce uncertainty before expensive implementation.
-
-### Terra implementation lane
-
-- Give it one subsystem and non-overlapping file ownership.
-- Require focused tests and a diff summary.
-- Escalate cross-cutting architecture changes to the lead.
-
-### Sol Ultra review lane
-
-- Keep it independent from the implementation author when possible.
-- Ask it to attack assumptions, failure modes, security boundaries, concurrency, migrations, and release claims.
-- Require severity-ranked findings and concrete evidence, not stylistic preference.
-
-## Acceptance checklist for the lead
-
-- The worker stayed inside scope.
-- Starting and ending revisions, final status, exact changes, and generated artifacts are recorded.
-- The returned evidence can be independently reproduced.
-- No user approval or external mutation was silently assumed.
-- The lane integrates with current repository state and sibling lanes.
-- Required tests passed, or failures and skips are explicit.
-- The final user-facing claim is no stronger than the evidence.
+Check that the worker stayed within scope, preserved ownership, returned inspectable changes and meaningful evidence, and reported failures honestly. Reconcile the result with the current branch and sibling work. Complete required integration checks, then proceed toward the user's outcome without repeating passed checks unless something changed.
