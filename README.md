@@ -1,8 +1,8 @@
-# Orchestrate with Sol Ultra
+# Orchestrate with Astra
 
 > One accountable lead. Bounded worker lanes. Evidence before claims.
 
-Orchestrate with Sol Ultra is an instruction-only Codex skill for complex work that can be divided into independently verifiable lanes. It gives the active coordinator a repeatable protocol for planning, delegation, integration, safety boundaries, and final verification.
+Orchestrate with Astra is an instruction-only Codex skill for complex work that can be divided into independently verifiable lanes. It gives the active coordinator a protocol for useful delegation, exclusive ownership, integration, and proportional verification. Existing installations and `$orchestrate-with-sol-ultra` invocations keep working; the repository and skill identifier retain their original names.
 
 This repository does **not** contain an SDK, model endpoint, worker runtime, or deployment system. It does not upgrade the model already running your task.
 
@@ -19,13 +19,17 @@ This skill adds a disciplined operating model:
 - Give workers narrow scopes, explicit stop conditions, and required evidence.
 - Allow only one writer in a shared checkout.
 - Require isolated worktrees before multiple agents write in parallel.
-- Keep deployment, publication, spending, signing, secrets, and destructive actions behind fresh approval.
+- Preserve existing authorization and verify its scope before external or destructive actions.
+- Continue useful work through clarification, steering, and unavailable dependencies.
+- Stop expanding verification once the required checks pass unless new evidence warrants it.
 
-## What “Sol Ultra” means
+## Astra support and the existing name
 
-“Sol Ultra” is project shorthand for preferring `gpt-5.6-sol` in a host-exposed Ultra configuration for the highest-judgment work. It is **not** an API model ID, and the skill cannot force that configuration to exist.
+The lead preference is now `gpt-6-astra`, following [OpenAI's Astra guidance](https://developers.openai.com/api/docs/guides/latest-model#prompting-best-practices). The update addresses unnecessary permission pauses, conflicting instructions, delegation, task continuity, concise reporting, and excessive verification. These are instruction changes; this repository does not send API requests.
 
-The active host remains authoritative. If Sol, Terra, Luna, a requested reasoning level, or collaboration tools are unavailable, the coordinator must disclose the fallback and either use a supported substitute or remain single-agent.
+The identifier `orchestrate-with-sol-ultra` stays stable so existing installations, links, and prompts remain valid. Explicit requests for Sol Ultra still prefer `gpt-5.6-sol` with a host-exposed `ultra` configuration. Neither the name nor the skill changes the model already running your task.
+
+Use only models and reasoning settings exposed by the host. Preserve the user's explicit choice and the effective effort unless a supported adjustment is warranted. If overrides are unavailable, workers inherit the active model. An Astra coordinator does not need a replacement Sol lead. Disclose a material fallback once and continue with the available capabilities.
 
 ## How it works
 
@@ -34,9 +38,9 @@ flowchart TD
     U["User outcome and approval boundaries"] --> L["Accountable lead"]
     L --> D{"Useful independent lanes?"}
     D -->|"No"| S["Continue single-agent"]
-    D -->|"Yes"| E["Luna evidence lane"]
-    D -->|"Yes"| I["Terra implementation lane"]
-    D -->|"When risk warrants"| R["Sol critical review lane"]
+    D -->|"Yes"| E["Evidence lane"]
+    D -->|"Yes"| I["Implementation lane"]
+    D -->|"When risk warrants"| R["Independent review lane"]
     E --> G["Central integration gate"]
     I --> G
     R --> G
@@ -48,12 +52,12 @@ The preferred roles are conditional on what the host exposes:
 
 | Role | Preferred configuration | Responsibility |
 | --- | --- | --- |
-| Lead and final integrator | `gpt-5.6-sol` with host-exposed Ultra | Framing, architecture, decomposition, integration, and final verification |
-| Critical reviewer | Independent `gpt-5.6-sol` with host-exposed Ultra | Security, concurrency, migrations, native boundaries, and irreversible operations |
-| Bounded worker | `gpt-5.6-terra` with `high` or `max` | Owned implementation, diagnosis, focused tests, and evidence |
-| Evidence worker | `gpt-5.6-luna` with `medium` or `high` | Inventory, searches, documentation checks, test execution, and low-risk mechanical work |
+| Lead and final integrator | `gpt-6-astra` | Framing, architecture, decomposition, integration, and final verification |
+| Critical reviewer | Independent `gpt-6-astra`, when risk warrants | Security, concurrency, migrations, native boundaries, and irreversible operations |
+| Bounded worker | `gpt-5.6-terra`, or inherit the active model | Owned implementation, diagnosis, focused tests, and evidence |
+| Evidence worker | `gpt-5.6-luna`, or inherit the active model | Inventory, searches, documentation checks, test execution, and low-risk mechanical work |
 
-Every worker assignment uses the mandatory [delegation packet](references/delegation-packet.md). The lead inspects the actual result, integrates centrally, runs the appropriate checks, and reports failures and skips explicitly.
+Use the [delegation packet](references/delegation-packet.md), with detail proportional to the lane’s risk. The lead inspects the actual result, integrates centrally, runs the appropriate checks, and reports failures and skips explicitly.
 
 ## Install
 
@@ -105,7 +109,7 @@ The repository includes a zero-dependency structural validator:
 python3 scripts/validate.py
 ```
 
-It checks the skill frontmatter, required files, UI metadata, Markdown links, and fenced code blocks. Behavioral changes still require a realistic forward test.
+It checks the skill frontmatter, required files, UI metadata, Markdown links, and fenced code blocks. CI runs the same validator on pushes and pull requests. For decision-rule changes, use the [behavioral scenarios](docs/BEHAVIORAL-CHECKS.md); structural validation alone does not prove behavior.
 
 ## Use
 
@@ -142,10 +146,10 @@ For a database migration, the lead might arrange:
 
 1. Luna inventories migrations, tests, and repository rules without editing.
 2. Terra implements one bounded migration lane as the sole writer.
-3. A separate Sol reviewer challenges rollback, compatibility, and data-loss assumptions.
-4. The lead reviews every change, runs focused and broad checks, and reports what is locally proven versus still unverified.
+3. An independent Astra reviewer challenges rollback, compatibility, and data-loss assumptions.
+4. The lead reviews every change, runs required checks proportional to the change, and reports what is locally proven versus still unverified.
 
-The exact topology must follow the task, host limits, and repository instructions. The skill never requires delegation when a single-agent path is safer or simpler.
+The exact topology must follow the task, host limits, and repository instructions. When the host permits it, delegate useful independent work without a separate permission question. Keep small or tightly coupled work local.
 
 ## Safety model
 
@@ -153,7 +157,8 @@ The safety controls are procedural instructions interpreted by the active coordi
 
 - **One writer per shared checkout.** Parallel writers require isolated worktrees or equivalent isolation.
 - **Authentication is not authority.** A logged-in CLI, remote, or provider session does not authorize mutation.
-- **Approvals stay with the lead and user.** Workers do not own destructive actions, external publication, provider spending, signing, releases, or final scope decisions.
+- **Authority stays with the lead and user.** Workers do not own destructive actions, external publication, provider spending, signing, releases, or final scope decisions. The lead checks authority already granted for the target; the user need not repeat it without a material scope change.
+- **Read-only discovery is separate from mutation.** A worker may use scoped read-only GitHub commands when the host and task permit them. A logged-in session does not authorize writes.
 - **Evidence is mandatory.** Worker returns include revisions, Git status, exact changes, generated artifacts, commands, failures, assumptions, and risks.
 - **The lead verifies.** Summaries are not accepted on trust; actual changes and checks are inspected centrally.
 
@@ -189,9 +194,10 @@ There are currently no published evals proving a speed, quality, token, or cost 
 ├── references/delegation-packet.md # Mandatory worker packet and acceptance checks
 ├── scripts/validate.py              # Zero-dependency structural validation
 ├── docs/BENCHMARKING.md            # Honest evaluation and reporting protocol
+├── docs/BEHAVIORAL-CHECKS.md       # Decision-rule regression scenarios
 ├── CONTRIBUTING.md                 # How to propose and validate changes
 ├── SECURITY.md                     # Private vulnerability-reporting policy
-└── .github/                        # Issue forms and pull-request checklist
+└── .github/                        # Validation CI, issue forms, and PR checklist
 ```
 
 ## Update
@@ -206,7 +212,7 @@ Restart Codex only if the updated skill is not detected automatically.
 
 ## FAQ
 
-### Does this upgrade my current task to Sol Ultra?
+### Does this upgrade my current task to Astra?
 
 No. It can prefer host-exposed configurations for delegated roles, but it cannot replace or silently upgrade the active coordinator.
 
@@ -216,7 +222,7 @@ No. Cleanly divided tasks may finish sooner and may shift work to lower-cost tie
 
 ### Can workers push code or open pull requests?
 
-Not without fresh exact user approval and a verified target. The same restriction covers comments, merges, tags, releases, deployment, publication, signing, spending, and undeclared secret access.
+The lead owns external mutations and verifies the exact target and current authorization before acting. Workers prepare and verify their assigned local changes. Scoped read-only `gh` calls may be delegated. Existing authorization remains valid for the same scope; authentication alone grants none.
 
 ### What happens if the preferred models are unavailable?
 
@@ -237,6 +243,6 @@ No license has been selected yet. Public visibility does not grant permission to
 ## References and independence
 
 - [Official OpenAI documentation: Build skills](https://developers.openai.com/codex/build-skills)
-- [Official OpenAI documentation: GPT-5.6 model guidance](https://developers.openai.com/api/docs/guides/latest-model)
+- [Official OpenAI documentation: GPT-6 Astra model guidance](https://developers.openai.com/api/docs/guides/latest-model)
 
 This is an independent community project maintained by RSB-HOLDING. It is not an official OpenAI skill and is not endorsed by OpenAI. OpenAI, Codex, and GPT model names are trademarks of their respective owner.

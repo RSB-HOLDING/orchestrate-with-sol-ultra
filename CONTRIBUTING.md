@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for helping improve Orchestrate with Sol Ultra.
+Thank you for helping improve Orchestrate with Astra (installed as `orchestrate-with-sol-ultra`).
 
 ## Before you begin
 
@@ -8,12 +8,12 @@ Thank you for helping improve Orchestrate with Sol Ultra.
 - Keep `SKILL.md` at the repository root with valid YAML frontmatter.
 - Keep the skill instruction-only unless a deterministic, repeatedly needed resource clearly justifies a script or asset.
 - Preserve user, host, and repository instructions as higher authority than this skill.
-- Never weaken approval, external-mutation, one-writer, isolation, or evidence boundaries without a concrete safety review.
+- Preserve one-writer, isolation, evidence, and actual authorization boundaries. Audit changes to these rules with realistic scenarios; do not add repeated approval demands for work already authorized.
 - Do not include credentials, private prompts, customer data, generated binaries, or unrelated dependencies.
 
 ## Propose a change
 
-1. Open an issue describing the problem or improvement.
+1. Describe the concrete problem in a focused pull request; open an issue first only when design discussion would help.
 2. Fork the repository and create a focused branch.
 3. Make the smallest coherent change.
 4. Validate the structure and behavior.
@@ -39,7 +39,7 @@ The validator checks that:
 
 Review manually that UI metadata still summarizes the skill accurately and that documentation distinguishes host capability preferences from guarantees.
 
-You may also invoke Codex’s built-in `$skill-creator` for authoring guidance and an independent review. Changes to delegation, model routing, safety, approvals, or integration rules should include a realistic forward test. Report the prompt, environment, models actually used, result, failures, and any fallback.
+You may also invoke Codex’s built-in `$skill-creator` for authoring guidance and an independent review. Changes to delegation, model routing, safety, approvals, or integration rules should include a realistic forward test using [the behavioral scenarios](docs/BEHAVIORAL-CHECKS.md). Report the prompt, environment, models actually used, result, failures, and any fallback.
 
 ## Pull-request expectations
 

@@ -1,112 +1,55 @@
 ---
 name: orchestrate-with-sol-ultra
-description: Coordinate complex coding and operational work with GPT-5.6 Sol in a host-exposed Ultra configuration as the preferred lead, planner, integrator, and reviewer, while delegating bounded lanes to GPT-5.6 Terra or Luna. Use when the user asks for Sol Ultra, highest reasoning, multi-agent delegation, model-tiered orchestration, or a complex repository task with several independent workstreams and integration risk. Do not use for simple questions, tiny edits, or work that cannot be divided safely.
+description: Coordinate complex coding work with an Astra-capable lead and bounded parallel agents. Use for multi-agent delegation, model-tiered orchestration, or repository tasks with independent workstreams and integration risk. Supports explicit Sol Ultra requests. Do not use for simple questions, tiny edits, or tightly sequential work.
 ---
 
-# Orchestrate With Sol Ultra
+# Orchestrate with Astra
 
-Use the strongest available reasoning where judgment compounds, and more efficient models where the work is bounded and independently verifiable. Keep one accountable lead from problem framing through final evidence.
+Keep one accountable lead from the user's requested outcome through integration and verification. The installation name `orchestrate-with-sol-ultra` remains stable for existing users; it does not pin the running model to Sol.
 
-## Establish the operating contract
+## Establish scope and keep moving
 
-1. Restate the concrete outcome, scope, constraints, approval boundaries, and definition of done.
-2. Read all repository and task instructions before planning or delegating. Inspect the current state and preserve existing work.
-3. Treat the active user request as authoritative. Do not replace a goal, change another task, or widen scope unless the user explicitly asks.
-4. Keep external mutations, deployment, publication, signing, paid-provider use, destructive actions, and secret handling behind their existing approval boundaries.
-5. Never claim that the active coordinator was upgraded to a model or reasoning level unless the host explicitly confirms it.
-6. Let host, repository, and user instructions override this skill. Spawn workers only when the user explicitly requests or invokes multi-agent orchestration, or when host policy explicitly authorizes proactive delegation.
+Read applicable repository instructions and inspect branch, revision, working changes, and ownership before assigning work. Preserve existing work. User instructions take precedence over this skill's defaults, within host constraints.
 
-## Select the model topology
+Treat requests to implement, fix, or update as instructions to complete the work. Infer routine details from context and carry forward authorization already given for the same scope and target. Continue reversible preparation, local fixes, reviews, and required checks without adding approval pauses. Ask only when missing information materially changes the outcome or authority is unresolved; continue useful independent work while waiting.
 
-Inspect the models, reasoning levels, collaboration tools, and concurrency exposed by the host. Use these preferences only when they are actually available:
+Prepare a concrete, reviewable result before asking for any remaining approval. Authentication alone is not authorization. Verify the target and existing authority before an external write, deployment, publication, signing, provider spend, or destructive action. Reconfirm only when authority is missing or the target, scope, or consequences have materially changed. If an instruction causes a pause, cite the exact file and rule, explain what is missing, and distinguish that rule from your interpretation.
 
-| Role | Preferred configuration | Assign |
+Incorporate corrections and new constraints into the active task. Answer status questions briefly, then resume. Replace the objective only when the user cancels or clearly changes it. After interruption or compaction, recheck current state and resume unfinished work; do not repeat completed actions blindly.
+
+## Select capabilities from the host
+
+Inspect available model identifiers, effort levels, collaboration tools, inheritance rules, and concurrency. Honor the user's explicit model choice. Otherwise prefer these roles when the host permits selecting them:
+
+| Role | Preference | Work |
 | --- | --- | --- |
-| Lead and final integrator | `gpt-5.6-sol` with a host-exposed `ultra` configuration | Goal framing, architecture, decomposition, risk decisions, integration, final review, and release judgment |
-| Critical independent reviewer | `gpt-5.6-sol` with a host-exposed `ultra` configuration | Security, concurrency, native boundaries, migrations, irreversible operations, and adversarial review |
-| Bounded implementation worker | `gpt-5.6-terra` with `high` or `max` reasoning | A clearly owned subsystem, diagnosis, implementation, focused tests, and evidence collection |
-| Evidence worker | `gpt-5.6-luna` with `medium` or `high` reasoning | Repository inventory, searches, status snapshots, documentation cross-checks, test execution, and low-risk mechanical work |
+| Lead and integrator | `gpt-6-astra` | Framing, architecture, decomposition, integration, final judgment |
+| Independent reviewer | `gpt-6-astra`, when the risk warrants a separate review | Security, concurrency, migrations, and assumptions the author may miss |
+| Bounded implementation worker | `gpt-5.6-terra`, or inherit the current model | One owned subsystem, focused fixes and verification |
+| Evidence worker | `gpt-5.6-luna`, or inherit the current model | Inventory, searches, documentation checks, and test evidence |
 
-If the active coordinator is not confirmed as Sol Ultra, do not pretend otherwise. Only after the delegation gate above passes, and when collaboration tools allow it, ask a `gpt-5.6-sol`/`ultra` subagent to produce the plan or independent final review, while the active coordinator remains transparent about its role.
+For an explicit Sol Ultra request, prefer `gpt-5.6-sol` with `ultra` only if both are exposed. Otherwise preserve the effective supported effort, increasing it when task difficulty warrants and selection is allowed. “Ultra” is a host configuration label, not a model identifier or a portable API setting.
 
-Verify capabilities only from host-exposed metadata. If a preferred model or reasoning level is unavailable, choose the strongest named substitute the host actually exposes, disclose the fallback once, and continue. If collaboration tools are unavailable or a spawn is rejected, continue single-agent unless the task truly requires parallel execution. Do not retry with invented identifiers or claim that a requested role participated when it did not.
+The skill cannot change the active coordinator. Do not spawn a replacement lead merely to match the table, downgrade an Astra coordinator to Sol, or claim a model change that the host did not confirm. If selection is unavailable, inherit the active model. If a requested capability is unavailable or a spawn fails, disclose the material fallback once and continue with available tools. Never invent identifiers or claim that an absent role participated.
 
-## Decide whether to delegate
+## Delegate useful independent work
 
-Delegate only when at least one lane can run independently and its result will remain useful even if another lane changes. Good candidates include:
+When host and user instructions permit collaboration, delegate work that can run independently alongside useful coordinator work and is likely to save time or improve quality. Examples include read-only inventory during implementation, separate owned subsystems, and independent review. Delegation does not require another permission question within an already authorized task.
 
-- Read-only inventory alongside implementation planning.
-- Separate backend, frontend, test, or documentation ownership with non-overlapping files.
-- Independent security or migration review after a proposed design exists.
-- Parallel verification on different platforms or test suites.
+Keep tightly coupled or small work local. Respect available slots; create only as many lanes as the task supports. Give each file or subsystem one owner and retain integration decisions with the lead. Read [references/delegation-packet.md](references/delegation-packet.md) when preparing assignments; scale packet detail to risk.
 
-Stay single-agent when the task is small, tightly sequential, requires constant shared context, or would create overlapping edits. Delegation overhead must be smaller than the work delegated.
+Use one writer per shared checkout. Parallel writers need isolated worktrees or equivalent isolated environments and non-overlapping ownership. Serialize shared-state mutations, including dependency installs, formatters, generated files, tests that modify shared fixtures, Git index operations, and lockfile updates. Read-only tools such as `gh api` may be delegated when task scope and host policy permit them; a CLI's name does not make every command a mutation.
 
-Respect the host concurrency limit. Reserve enough capacity for the coordinator, and never spawn more workers than there are genuinely independent lanes.
+Workers inherit only the authority explicitly included in their packet. They cannot grant approvals, widen scope, or independently publish, deploy, sign, release, spend, or perform destructive actions. The lead owns external mutations and verifies existing authorization immediately before acting; this does not require the user to repeat valid authorization.
 
-## Build the lead plan
+## Supervise and integrate
 
-1. Map the critical path, parallel lanes, risks, and gates.
-2. Separate facts already verified from assumptions that still need evidence.
-3. Assign one accountable owner per file, subsystem, or decision boundary.
-4. Keep high-coupling architecture and cross-lane integration with the accountable lead.
-5. Define the evidence required to accept each lane: diffs, commands, test results, screenshots, logs, or cited source material.
-6. Share a concise user update naming the active lanes and why they are separated before spawning workers.
+Continue useful work while workers run. Share concise updates about findings, material uncertainty, and what the next step resolves. Read worker results before accepting them, redirect stale lanes, and stop duplicate work.
 
-## Delegate bounded packets
+Inspect actual diffs and evidence, reconcile interfaces and assumptions, and verify the combined result. Run required repository checks and tests proportional to the change. Add tests for meaningful behavior or regressions; do not add tests that merely match instruction wording. Once applicable checks pass, broaden or repeat them only after a new change, failure, or unresolved concern. For changes to skill decision rules, use an independent realistic forward test when it adds confidence; see [docs/BEHAVIORAL-CHECKS.md](docs/BEHAVIORAL-CHECKS.md).
 
-Read [references/delegation-packet.md](references/delegation-packet.md) before sending the first worker assignment.
+Distinguish source changes, local validation, remote publication, installation, and runtime proof. An unavailable external dependency may block one step; finish the independent authorized work and report the precise remaining blocker.
 
-Give every worker a self-contained packet containing:
+## Report the result
 
-- One objective and a measurable completion condition.
-- The selected model role and why it fits.
-- Relevant context, paths, instructions, and known constraints.
-- Explicit allowed and forbidden files or systems.
-- Required checks and evidence.
-- Stop conditions and escalation rules.
-
-Use one writer at a time in a shared checkout; keep all other lanes read-only. Parallel writers require isolated worktrees or equivalent isolated environments, non-overlapping ownership, and the lead as the sole integrator. Serialize commands that can mutate shared state, including dependency installation, formatting, code generation, tests with writable fixtures or snapshots, Git index operations, and lockfile updates.
-
-Do not delegate user approvals, final scope decisions, destructive actions, external publication, provider spending, signing, release authority, or the final truth claim. An authenticated tool or remote is not authority: without fresh exact approval and a verified target, workers must not run `gh`, push, open or update a pull request, comment, merge, tag, release, publish, deploy, sign, or mutate an external system.
-
-## Supervise without micromanaging
-
-1. Continue useful coordinator work while workers run.
-2. Prefer compact progress snapshots; read full worker output only when needed.
-3. Redirect a lane when new evidence invalidates its assumptions.
-4. Stop duplicate or stale work quickly.
-5. Tell the user if a worker uncovers a material risk, permission boundary, or change to the critical path.
-
-## Integrate centrally
-
-The lead remains accountable for the combined result.
-
-1. Inspect every worker's evidence and actual changes; do not accept a summary on trust alone.
-2. Reconcile interfaces, invariants, naming, migrations, error handling, and documentation across lanes.
-3. Review the final diff for unintended or unrelated changes.
-4. Run the highest-value focused checks first, then the appropriate broader suite.
-5. Distinguish clearly between source present, locally integrated, installed, staged, and production-proven states.
-6. If verification fails, assign the smallest correction lane and repeat integration checks.
-
-## Close with an evidence-based result
-
-Report:
-
-- The outcome and whether the original definition of done was met.
-- Which roles and models actually participated, what each completed, and whether Sol Ultra was unavailable.
-- Files or systems changed.
-- Checks passed, failed, skipped, or not run.
-- Remaining blockers, risks, approval gates, and exact next action.
-- Any model or reasoning fallback that materially affected confidence.
-
-Do not equate a large amount of code with a working product. Never describe deployment, signing, provider execution, staging, or release as complete without direct evidence.
-
-## Example triggers
-
-- "Use Sol Ultra to lead this migration and delegate the independent work."
-- "Run the strongest multi-agent setup for this repository."
-- "Have GPT-5.6 plan everything, then use more efficient models for bounded implementation."
-- "Split this complex feature across agents, integrate it, and prove it works."
-
-Do not trigger for requests such as "rename this variable," "explain this function," or "run one test."
+Lead with what changed and whether the user's outcome is complete. Use concise prose or a short list for parallel facts. Include the affected files or repositories, checks and their results, material limitations, and the next required action. Name participating models only when known and useful to understanding the result. Do not claim performance gains, successful tests, publication, or production behavior without evidence.

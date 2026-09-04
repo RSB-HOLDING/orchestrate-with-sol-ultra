@@ -1,7 +1,7 @@
 interface:
-  display_name: "Orchestrate with Sol Ultra"
+  display_name: "Orchestrate with Astra"
   short_description: "One lead, bounded agents, evidence-first integration"
-  default_prompt: "Use $orchestrate-with-sol-ultra to coordinate bounded agents, integrate centrally, and verify the result."
+  default_prompt: "Use $orchestrate-with-sol-ultra to complete this task with an Astra-capable lead, useful parallel agents, and focused verification."
 
 policy:
   allow_implicit_invocation: true
